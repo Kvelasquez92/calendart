@@ -42,7 +42,7 @@ class Artist(models.Model):
     email = models.EmailField(max_length=254, null=False, blank=False)
     address = models.CharField(max_length=150, null=True, blank=True)
     image_profile = models.ImageField(upload_to=get_artist_image_path, blank=True, null=True)
-    is_active = models.BooleanField(null=False, blank=False, default=True)
+    is_active = models.BooleanField(null=False, blank=False, default=False)
     category = models.ForeignKey(Category, null=True, blank = True, on_delete = models.CASCADE)
     def __str__(self):
         return self.nickname
