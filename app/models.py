@@ -56,10 +56,10 @@ class Note(models.Model):
         return self.title
 
 class Event(models.Model):
-    title = models.CharField('Titulo del evento', max_length=45, null=False, blank=False)
+    title = models.CharField(max_length=45, null=False, blank=False)
     description = models.TextField('Descripcion del evento')
-    location = models.CharField('Lugar del evento', max_length=45, null=False, blank=False)
-    date = models.DateTimeField('Fecha y hora')
+    location = models.CharField(max_length=45, null=False, blank=False)
+    date = models.DateTimeField()
     image_profile = models.ImageField(upload_to=get_event_image_path, blank=True, null=True)
     Active = 'A'
     Finished = 'F'
@@ -69,15 +69,15 @@ class Event(models.Model):
         (Finished, 'Terminado'),
         (Canceled, 'Cancelado'),
     )
-    state = models.CharField('Estado del evento', max_length=1, choices = state_choice, default = Active)
+    state = models.CharField(max_length=1, choices = state_choice, default = Active)
     categories = models.ManyToManyField(Category)
     arist = models.ManyToManyField(Artist)
     def __str__(self):
         return self.title
 
 class User(models.Model):
-    nickname = models.CharField('Nombre de usuario', max_length=45, null = False, blank = False)
-    email = models.EmailField('Email', max_length=254, null=False, blank=False)
+    nickname = models.CharField(max_length=45, null = False, blank = False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
     male = 'M'
     female = 'F'
     other = 'O'
@@ -86,7 +86,7 @@ class User(models.Model):
         (female, 'Femenino'),
         (other, 'Otro'),
     )
-    genre = models.CharField('Genero', max_length=1, null = True, blank=False, choices = genre_choice)
+    genre = models.CharField(max_length=1, null = True, blank=False, choices = genre_choice)
     arist = models.ManyToManyField(Artist)
     event = models.ManyToManyField(Event)
     def __str__(self):
