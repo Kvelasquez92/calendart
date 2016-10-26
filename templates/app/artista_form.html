@@ -1,11 +1,12 @@
 {% extends "base/base.html" %}
 
-
+{% block title%}Nuevo artista{% endblock %}
 
 {% block content %}
+<div id="home"  style="" class=" clearfix grid">
+<br>
 <form method="post">
   {% csrf_token %}
-
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="form-group">
@@ -67,4 +68,5 @@
     </div>
   </div>
 </form>
+</div>
 {% endblock content %}

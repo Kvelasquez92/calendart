@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'dbcalendart',
-        'USER': 'openerp',
-        'PASSWORD': 'Kk4/1',
+        'USER': 'postgres',
+        'PASSWORD': 'EJaa2508',
         'HOST': '127.0.0.1',
         'PORT': 5432,
     }

@@ -11,3 +11,6 @@ class ArtistCreate(CreateView):
     form_class = ArtistForm
     template_name = 'app/artista_form.html'
     success_url = reverse_lazy('artist:artist_create')
+
+def home(request):
+    return render(request, 'app/home.html')
