@@ -1,5 +1,7 @@
 {% extends "base/base.html" %}
 
+
+
 {% block content %}
 <form method="post">
   {% csrf_token %}
@@ -7,50 +9,56 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="form-group">
-        <label for="{{form2.nombre.name}}">{{form.nombre.label}}</label>
-        {{form2.nombre}}
+        <label for="{{form.nickname.name}}">{{form.nickname.label}}</label>
+        {{form.nickname}}
       </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
       <div class="form-group">
-        <label for="{{form2.apellidos.name}}">{{form.apellidos.label}}</label>
-        {{form2.nombre}}
+        <label for="{{form.name.name}}">{{form.name.label}}</label>
+        {{form.name}}
       </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
       <div class="form-group">
-        <label for="{{form2.edad.name}}">{{form.edad.label}}</label>
-        {{form2.nombre}}
+        <label for="{{form.last_name.name}}">{{form.last_name.label}}</label>
+        {{form.last_name}}
       </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
       <div class="form-group">
-        <label for="{{form2.correo.name}}">{{form.correo.label}}</label>
-        {{form2.nombre}}
+        <label for="{{form.birth_date.name}}">{{form.birth_date.label}}</label>
+        {{form.birth_date}}
       </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
       <div class="form-group">
-        <label for="{{form2.telefono.name}}">{{form.telefono.label}}</label>
-        {{form2.nombre}}
+        <label for="{{form.phone_number.name}}">{{form.phone_number.label}}</label>
+        {{form.phone_number}}
       </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
       <div class="form-group">
-        <label for="{{form2.domicilio.name}}">{{form.domicilio.label}}</label>
-        {{form2.nombre}}
+        <label for="{{form.email.name}}">{{form.email.label}}</label>
+        {{form.email}}
       </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
       <div class="form-group">
-        <label for="{{form.numero_mascotas.name}}">{{form.numero_mascotas.label}}</label>
-        {{form2.nombre}}
+        <label for="{{form.address.name}}">{{form.address.label}}</label>
+        {{form.address}}
       </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
       <div class="form-group">
-        <label for="{{form.razones.name}}">{{form.razones.label}}</label>
-        {{form2.nombre}}
+        <label for="{{form.image_profile.name}}">{{form.image_profile.label}}</label>
+        {{form.image_profile}}
+      </div>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="form-group">
+        <label for="{{form.category.name}}">{{form.category.label}}</label>
+        {{form.category}}
       </div>
     </div>
     <div class="col-md-8 col-md-offset-2">

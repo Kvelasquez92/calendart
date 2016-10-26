@@ -36,8 +36,8 @@ class ArtistForm(forms.ModelForm):
         'last_name': forms.TextInput(attrs={'class':'form-control'}),
         'birth_date': forms.TextInput(attrs={'class':'form-control'}),
         'phone_number': forms.TextInput(attrs={'class':'form-control'}),
-        'email': forms.TexInput(attrs={'class':'form-control'}),
+        'email': forms.TextInput(attrs={'class':'form-control'}),
         'address': forms.Textarea(attrs={'class':'form-control'}),
-        'image_profile': forms.FileField(attrs={'class':'form-control'}),
+        'image_profile': forms.ImageField(),
         'category': forms.CheckboxSelectMultiple(),
         }
