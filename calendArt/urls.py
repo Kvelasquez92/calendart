@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.views import login, logout_then_login
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('app.urls'), name='index'),
-    url(r'^artists/', include('app.urls', namespace = 'artist')),
+    url(r'^accounts/login/', login, {'template_name':'miembros/index.html'}, name='login'),
+    url(r'^logout/', logout_then_login, name='logout'),
+    url(r'^home/', include('apps.agenda.urls', namespace='home')),
+    url(r'^members/', include('apps.miembros.urls', namespace = 'member')),
+    url(r'^events/', include('apps.agenda.urls', namespace = 'event')),
+    url(r'^notes/', include('apps.notas.urls', namespace = 'note')),
 ]

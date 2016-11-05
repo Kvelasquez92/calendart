@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Inicio de Sesión
+{% endblock %}
+{% block navbar%}
+{% endblock %}
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	 <div class="row">
+    	<div class="col-md-3 col-md-offset-4">
+    		<div class="form-group">
+        		<label for="username">Nombre de usuario:</label>
+        		<input class="form-control" type="text" name="username">
+    	   </div>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-md-3 col-md-offset-4">
+    		<div class="form-group">
+        		<label for="username">Contraseña:</label>
+        		<input class="form-control" type="password" name="password">
+    	   </div>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-md-3 col-md-offset-4">
+    		<div class="form-group">
+        		<input class="btn btn-primary" type="submit" value="Ingresar">
+		      	<a href="#">Olvidé mi contraseña</a>
+    	   </div>
+        </div>
+    </div>
+</form>
+
+
+{% endblock %}

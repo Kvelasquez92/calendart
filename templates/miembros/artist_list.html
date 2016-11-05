@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <td>Foto de Perfil</td>
+      <td>Nombre</td>
+      <td>Apellidos</td>
+      <td>Fecha Nac.</td>
+      <td>Tel.</td>
+      <td>Email</td>
+      <td>Vive en</td>
+      <td>Tipo Arte</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% if object_list %}
+    {% for artist in object_list %}
+    <tr>
+      <td><a href="{{ artist.image_profile.url }}"><img src="{{ artist.image_profile.url }}" style="width:120px;height:100px;"></a></td>
+      <td>{{ artist.name }}</td>
+      <td>{{ artist.last_name }}</td>
+      <td>{{ artist.birth_date }}</td>
+      <td>{{ artist.phone_number }}</td>
+      <td>{{ artist.email }}</td>
+      <td>{{ artist.address }}</td>
+      <td>{{ artist.phone_number }}</td>
+      <td>{{ artist.category.name }}</td>
+      <td>
+        <a class="btn btn-primary" href="{% url 'artist:artist_update' artist.id %}">Editar</a>
+      </td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <h3>No hay registros de Artistas!!</h3>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock content %}
