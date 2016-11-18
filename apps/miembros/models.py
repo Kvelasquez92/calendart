@@ -34,7 +34,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
     biography = models.TextField(blank = True, null = True)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     address = models.CharField(max_length=150, null=True, blank=True)
-    image_profile = models.ImageField(upload_to='artists', blank=True, null=True)
+    image_profile = models.ImageField(upload_to='members', blank=True, null=True)
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
     members = models.ManyToManyField('Member', blank = True)
     def __str__(self):
@@ -53,4 +53,4 @@ class Member(AbstractBaseUser, PermissionsMixin):
         return self.username
 
     def presentacion(self):
-        return 'Soy ', self.first_name, 'y me dicen ', self.username, ', vivo en ', self.address, 'y me gusta ', members.username
+        return 'Soy ' + self.first_name + ' y me dicen ' + self.username + ', vivo en ' + self.address

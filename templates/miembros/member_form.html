@@ -1,19 +1,108 @@
 {% extends "base/base.html" %}
 
+{% load staticfiles %}
+
+{% block style %}
+<style media="screen">
+.btn-primary {
+	background-color: #663399;
+	border: none;
+	color: white;
+	padding: 8px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+input{
+    text-align: center;
+    padding: 10px 100px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid #a1a1a1;
+    color: #404040
+}
+.nothing{
+  font-size:14px;
+  line-height:20px;
+  width:300px;
+  color:red;"
+}
+select{
+  background-color: white;
+  font-size: 12px;
+  font-weight: bolder;
+  color: #404040;
+  border-radius: 8px;
+}
+select[name="date_of_birth_day"]{
+    padding: 6px 10px;
+}
+select[name="date_of_birth_month"]{
+    padding: 6px 25px;
+}
+select[name="date_of_birth_year"]{
+    padding: 6px 20px;
+}
+</style>
+{% endblock style %}
+
 {% block title%}Nuevo Miembro{% endblock %}
 
 {% block content %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<form enctype="multipart/form-data" method="post">
-  {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-</form>
+<section class="content">
+  <div class="container">
+
+    <div class="grid_6" style="margin-left: 19rem; text-align:center;">
+      <div class="banner ">
+        <div class="bann_capt  bn__1">
+          <div class="maxheight">
+            <img src="{%static 'images/icon4.png'%}" alt="" style="padding-top:30px;" height="80px" width="80px">
+            <div class="bann_title">Registrate</div>
+            <form enctype="multipart/form-data" method="post">
+              {% csrf_token %}
+                <div class="col-md-6 col-md-offset-3">
+                  <input type="text" name="username" placeholder="Nombre de usuario" required="required"/>
+                </div>
+                  <div class="col-md-6 col-md-offset-3">
+                    <input type="text" name="first_name" placeholder="Nombre(s)" required="required"/>
+                  </div>
+                  <div class="col-md-6 col-md-offset-3">
+                    <input type="text" name="last_name" placeholder="Apellido(s)" required="required" />
+                  </div>
+                  <div class="col-md-6 col-md-offset-3">
+                    <p style="font-size:16px;padding-top:-1px;height:4px;margin-left:-3rem;">Fecha de Naciento</p>
+                    {{form.date_of_birth}}
+                  </div>
+                  <div class="col-md-6 col-md-offset-3" style="padding-top:15px;">
+                    {{form.email.errors}}
+                    <input type="text" name="email" placeholder="Dirección de correo" required="required" />
+                  </div>
+                  <div class="col-md-6 col-md-offset-3">
+                    <input type="text" name="address" placeholder="¿Dónde vives?" required="required" />
+                  </div>
+                  <div class="col-md-6 col-md-offset-3">
+                    <input type="password" name="password1" placeholder="Contraseña" required="required" />
+                    <div class="nothing" style="text-align:right; padding-left:2rem;">
+                      {{form.password1.errors}}
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-md-offset-3">
+                    <input type="password" name="password2" placeholder="{{form.password2.label}}" required="required" />
+                    <div class="nothing" style="text-align:right;padding-left:2rem;">
+                      {{form.password2.errors}}
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-md-offset-3" style="padding-top:15px;">
+                    <input class="btn btn-primary" type="submit" value="Registrar"> <br>
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+Agenda
+{% endblock %}
+
+{% block content %}
+<table class="table table-bordered">
+    {% if events %}
+    {% for event in events %}
+    <tr>
+      <td>
+        <p>Evento: {{ event.title }}</p>
+        <p><a href="{{ event.image_profile.url }}"><img src="{{ event.image_profile.url }}" style="width:120px;height:150px;"></a></p>
+          <p>Lugar: {{ event.location }}</p>
+          <p>Fecha y Hora: {{ event.date }} {{ event.time }}</p>
+          <p>Estado: {{ event.state }}</p>
+          <p>
+            <button type="submit" style="width:125px;height:35px">Ver</button>
+          </p>
+        </td>
+      </tr>
+    {% endfor %}
+    {% else %}
+    <h3>No hay registros de Eventos!!</h3>
+    {% endif %}
+</table>
+{% endblock content %}

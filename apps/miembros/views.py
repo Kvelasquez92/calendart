@@ -8,4 +8,4 @@ from apps.miembros.forms import MemberForm
 class MemberRegister(CreateView):
     form_class = MemberForm
     template_name = 'miembros/member_form.html'
-    success_url = reverse_lazy('member:member_create')
+    success_url = reverse_lazy('home:index')

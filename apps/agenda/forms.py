@@ -4,8 +4,6 @@ u'íó'
 from django import forms
 from datetime import datetime
 from apps.agenda.models import Event
-from apps.notas.models import Category
-from apps.miembros.models import Member
 
 class EventForm(forms.ModelForm):
     class Meta:
@@ -15,6 +13,7 @@ class EventForm(forms.ModelForm):
             'description',
             'location',
             'date',
+            'time',
             'image_profile',
             'categories',
             'members',
@@ -25,6 +24,7 @@ class EventForm(forms.ModelForm):
             'description': 'Descripción',
             'location': 'Ubicación',
             'date': 'Fecha',
+            'time': 'Hora',
             'image_profile': 'Foto de Portada',
             'categories': 'Categorías',
             'members': 'Artistas Participantes',
@@ -32,5 +32,5 @@ class EventForm(forms.ModelForm):
         widgets = {
             'date':forms.SelectDateWidget(years=range(datetime.today().year, datetime.today().year + 4)),
             'categories':forms.CheckboxSelectMultiple(),
-            'members':forms.CheckboxSelectMultiple(), 
+            'members':forms.CheckboxSelectMultiple(),
         }

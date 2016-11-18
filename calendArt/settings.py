@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps.miembros',
     'apps.agenda',
     'apps.notas',
+    'coverage',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -49,6 +50,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -111,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'es-es'
+LANGUAGE_CODE = 'es-la'
 
 TIME_ZONE = 'UTC'
 
@@ -136,5 +138,3 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 AUTH_USER_MODEL = 'miembros.Member'
 
 LOGIN_REDIRECT_URL = reverse_lazy('home:index')
-
-LOGOUT_REDIRECT_URL = reverse_lazy('login')

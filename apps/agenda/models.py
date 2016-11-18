@@ -11,6 +11,7 @@ class Event(models.Model):
     description = models.TextField()
     location = models.CharField(max_length=45, null=False, blank=False)
     date = models.DateField()
+    time = models.TimeField(blank=True, null=True)
     image_profile = models.ImageField(upload_to='events', blank=True, null=True)
     state_choice =(
         ('A', 'Activo'),

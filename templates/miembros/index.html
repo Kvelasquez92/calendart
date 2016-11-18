@@ -1,48 +1,73 @@
 {% extends 'base/base.html' %}
 
+{% load staticfiles %}
+
+{% block style %}
+<style media="screen">
+.btn-primary {
+	background-color: #663399;
+	border: none;
+	color: white;
+	padding: 8px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	cursor: pointer;
+}
+input{
+    text-align: center;
+    padding: 9px 50px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid #a1a1a1;
+    color: #404040
+}
+</style>
+{% endblock style %}
+
 {% block title %}
 Inicio de Sesión
 {% endblock %}
-{% block navbar%}
-{% endblock %}
 {% block content %}
-<form method="post">
-	{% csrf_token %}
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	 <div class="row">
-    	<div class="col-md-3 col-md-offset-4">
-    		<div class="form-group">
-        		<label for="username">Nombre de usuario:</label>
-        		<input class="form-control" type="text" name="username">
-    	   </div>
-        </div>
-    </div>
-    <div class="row">
-    	<div class="col-md-3 col-md-offset-4">
-    		<div class="form-group">
-        		<label for="username">Contraseña:</label>
-        		<input class="form-control" type="password" name="password">
-    	   </div>
-        </div>
-    </div>
-    <div class="row">
-    	<div class="col-md-3 col-md-offset-4">
-    		<div class="form-group">
-        		<input class="btn btn-primary" type="submit" value="Ingresar">
-		      	<a href="#">Olvidé mi contraseña</a>
-    	   </div>
-        </div>
-    </div>
-</form>
+<section class="content">
+  <div class="container">
 
+        <div class="grid_4" style="margin-left: 26rem;">
+          <div class="banner ">
+              <div class="bann_capt  bn__1">
+                <div class="maxheight">
+                  <img src="{%static 'images/icon1.png'%}" alt="" style="padding-top:30px;" height="90px" width="90px">
+                    <div class="bann_title">Iniciar Sesión</div>
+										<form method="post">
+											{% csrf_token %}
+											<center>
+											{% if form.non_field_errors %}
+											<ul class='form-errors'>
+												{% for error in form.non_field_errors %}
+												<li style="font-size:14px;line-height:20px;width:300px;color:red;">{{ error }}</li>
+												{% endfor %}
+											</ul>
+											{% endif %}
+										</center>
+												<div class="col-md-6 col-md-offset-3">
+													<input type="text" name="username" placeholder="Nombre de usuario" required="required" />
+												</div>
+												<div class="col-md-6 col-md-offset-3">
+													<input type="password" name="password" placeholder="Contraseña" required="required" />
+												</div>
+												<div class="col-md-6 col-md-offset-3">
+													<input class="btn btn-primary" type="submit" value="Entrar"><br>
+													<a href="{% url 'member:member_create' %}" style="font-size:14px;line-height:20px;">Registrarse</a>
+													<span style="font-size:14px;margin-left: 0rem;line-height:20px;"> | </span>
+													<a href="#" style="font-size:14px;margin-left: 0rem;line-height:20px;">Olvidé mi contraseña</a>
+												</div>
+										</form>
+                </div>
+              </div>
+        </div>
+      </div>
+</div>
+</section>
 
 {% endblock %}
