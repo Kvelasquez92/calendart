@@ -1,0 +1,46 @@
+{% extends 'base/base.html'%}
+
+{%block content%}
+<section class="content"><div class="ic"></div>
+  <div class="container">
+    <div class="row">
+
+      <div class="grid_7">
+        <h2>{{object.title}}</h2>
+          <img src="{{object.image_profile.url}}" alt="" class=" fleft" width="100px" height="150px">
+          <div class="extra_wrapper">
+          <div class="bq_title color1">Descripcion</div>
+       		<div style="color:#101223"><p>{{object.description}}</p>
+          <h5>Lugar y Fecha:</h5>
+          {{object.location}} {{object.date}} a las {{object.time}} horas
+          <h5>Estado:</h5>
+          {{object.state}}
+            {% with cat=object.categories.all|first %}
+            {% if cat.image_profile %}
+              <img src="{{ cat.image_profile.url }}" alt="" height="40px" width="40px" style="padding-top:20px;">
+              {% endif %}
+            {% endwith %}
+          </div>
+          </div>
+
+      </div>
+
+      <div class="grid_4 preffix_1">
+        <h2>Otros Eventos</h2>
+        {% for evento in eventos%}
+        <div class="block3">
+          <img src="{{evento.image_profile.url}}" width="220px" height="120px" alt="" class="img_inner">
+          <div class="extra_wrapper">
+            <div class="text1 color1">
+              <a href="{% url 'event:detalle_evento' evento.id%}">{{evento.title}}</a>
+            </div>
+            <div style="color:#101223">Lugar: {{evento.location}}<a href="#" class="color1">[...]</a></div>
+          </div>
+        </div>
+        {% endfor%}
+      </div>
+      </div>
+      </div>
+      </section>
+
+{%endblock%}

@@ -1,0 +1,170 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block style %}
+<style media="screen">
+.btn-primary {
+	background-color: #663399;
+	border: none;
+	color: white;
+	padding: 8px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+input{
+    text-align: center;
+    padding: 10px 45px;
+    margin: 10px 5px;
+    box-sizing: border-box;
+    border: 1px solid #a1a1a1;
+    color: #404040;
+    background-color: white;
+}
+textarea{
+  text-align: center;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: 1px solid #a1a1a1;
+  color: #404040;
+}
+textarea::-webkit-textarea-placeholder { /* WebKit browsers */
+  line-height: 100px;
+  font-size: 14px;
+}
+textarea:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  line-height: 100px;
+  font-size: 14px;
+}
+textarea::-moz-placeholder { /* Mozilla Firefox 19+ */
+  line-height: 100px;
+  font-size: 14px;
+}
+textarea:-ms-input-placeholder { /* Internet Explorer 10+ */
+  line-height: 100px;
+  font-size: 14px;
+}
+select{
+  background-color: white;
+  font-size: 12px;
+  font-weight: bolder;
+  color: #404040;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+select[name="date_of_birth_day"]{
+    padding: 6px 10px;
+}
+select[name="date_of_birth_month"]{
+    padding: 6px 25px;
+}
+select[name="date_of_birth_year"]{
+    padding: 6px 20px;
+}
+#id_categories{
+  box-sizing: border-box;
+  border: 1px solid #a1a1a1;
+  background-color: white;
+  width: 350px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+label{
+  color: #404040;
+  font-size: 13px;
+}
+</style>
+{% endblock style %}
+
+{% block title%}Perfil Artista{% endblock %}
+
+{% block content %}
+<section class="content">
+  <div class="container">
+
+    <div class="grid_7" style="margin-left: 16rem; text-align:center;">
+      <div class="banner ">
+        <div class="bann_capt  bn__1">
+          <div class="maxheight">
+            <img src="{%static 'images/icon7.png'%}" alt="" style="padding-top:30px;" height="80px" width="80px">
+            <div class="bann_title">Actualizar perfil</div>
+            <form enctype="multipart/form-data" method="post">
+              {% csrf_token %}
+								<div class="col-md-6 col-md-offset-3">
+										<p style="line-height:15px; padding-top:15px; text-align:left; margin: 20px 0;">
+											<label for="username" style="margin: 0 290px; font-size:20px; color:white;">Foto de perfil</label>
+										</p>
+										<p style="line-height:55px; margin: 10px 0;">
+											<a href="{{ form.image_profile.value.url }}"><img src="{{ form.image_profile.value.url }}" style="width:150px;height:140px;border-radius:10px;"></a>
+											<input type="file" name="image_profile" value="{{ form.image_profile.value.path }}" style="padding-top:2000px; width:250px; padding:6px;"/>
+										</p>
+								</div>
+                <div class="col-md-6 col-md-offset-3">
+                  	<p style="line-height:15px; padding-top:18px; text-align:left; margin: 0 0;">
+											<label for="username" style="margin: 0 90px; font-size:20px; color:white;">Nombre de usuario</label>
+											<label for="email" style="margin: 0 40px; font-size:20px; color:white;">Correo electrónico</label>
+                  	</p>
+										<p style="line-height:15px; margin: 0 0;">
+										<input type="text" name="username" required="required" value="{{form.username.value}}">
+										<input type="text" name="email" required="required" value="{{form.email.value}}"/>
+										{{form.email.errors}}
+										</p>
+                </div>
+                  <div class="col-md-6 col-md-offset-3">
+	                  	<p style="line-height:15px; padding-top:15px; text-align:left; margin: 0 0;">
+												<label for="first_name" style="margin: 0 90px; font-size:20px; color:white;">Nombre(s)</label>
+												<label for="last_name" style="margin: 0 95px; font-size:20px; color:white;">Apellido(s)</label>
+	                  	</p>
+											<p style="line-height:15px; margin: 0 0;">
+												<input type="text" name="first_name" required="required" value="{{form.first_name.value}}"/>
+		                    <input type="text" name="last_name" required="required" value="{{form.last_name.value}}"/>
+											</p>
+                  </div>
+                  <div class="col-md-6 col-md-offset-3">
+	                	<p style="line-height:15px; padding-top:15px; text-align:left; margin: 5px 0;">
+                    	<label for="date_of_birth" style="margin: 0 255px; font-size:20px; color:white;">Fecha de Naciento</label>
+										</p>
+                    <p style="line-height:15px; margin: 0 0;">{{form.date_of_birth}}</p>
+                  </div>
+                  <div class="col-md-6 col-md-offset-3">
+	                  	<p style="line-height:15px; padding-top:18px; text-align:left; margin: 0 0;">
+												<label for="address" style="margin: 0 90px; font-size:20px; color:white;">¿Dónde vives?</label>
+												<label for="phone_number" style="margin: 0 70px; font-size:20px; color:white;">Teléfono personal</label>
+											</p>
+											<p style="line-height:15px; margin: 0 0;">
+                    		<input type="text" name="address"required="required" value="{{form.address.value}}" />
+			                  <input type="text" pattern="[0-9]{0,3}[ ][0-9]{6,12}" name="phone_number" value="{{form.phone_number.value}}"/>
+											</p>
+                  </div>
+                <div class="col-md-6 col-md-offset-3">
+										<p style="line-height:15px; padding-top:15px; text-align:left; margin: 0 0;">
+											<label for="autobiography" style="margin: 0 280px; font-size:20px; color:white;">Autobiografía</label>
+										</p>
+										<p style="line-height:15px; margin: 0 0;">
+                  		<textarea cols="50" name="biography" rows="7" required="required">{{form.biography.value}}</textarea>
+										</p>
+                </div>
+		              <div class="col-md-8 col-md-offset-2">
+											<p style="line-height:15px; padding-top:15px; text-align:left; margin: 0 0;">
+												<label for="categories" style="margin: 0 290px; font-size:20px; color:white;">Categorías</label>
+											</p>
+											<p style="line-height:15px; margin: 0 0;">
+		                  {{form.categories}}
+		                  <div class="nada" style="color:red;font-size:14px;line-height:18px;">{{form.categories.errors}}</div>
+											</p>
+		              </div>
+                  <div class="col-md-6 col-md-offset-3" style="padding-top:15px;">
+                    <input class="btn btn-primary" type="submit" value="Guardar"> <br>
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

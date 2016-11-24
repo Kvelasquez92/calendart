@@ -64,9 +64,12 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -127,9 +130,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-MEDIA_URL = "media/"
-
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+MEDIA_URL = "media/"
 
 STATIC_URL = '/static/'
 
@@ -138,3 +141,10 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 AUTH_USER_MODEL = 'miembros.Member'
 
 LOGIN_REDIRECT_URL = reverse_lazy('home:index')
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'chicle.kevin@gmail.com'
+EMAIL_HOST_PASSWORD = '50254382587'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

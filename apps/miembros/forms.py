@@ -32,3 +32,41 @@ class MemberForm(UserCreationForm):
         widgets = {
             'date_of_birth':forms.SelectDateWidget(years=range(datetime.today().year-80, datetime.today().year - 4))
         }
+
+class ArtistForm(forms.ModelForm):
+    class Meta:
+        model=Member
+
+        fields = [
+            'biography',
+            'phone_number',
+            'date_of_birth',
+            'image_profile',
+            'categories',
+        ]
+
+        widgets = {
+            'date_of_birth':forms.SelectDateWidget(years=range(datetime.today().year-80, datetime.today().year - 4))
+        }
+
+class ArtistProfileForm(forms.ModelForm):
+    class Meta:
+        model = Member
+
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'date_of_birth',
+            'email',
+            'address',
+            'biography',
+            'phone_number',
+            'date_of_birth',
+            'image_profile',
+            'categories',
+        ]
+
+        widgets = {
+            'date_of_birth':forms.SelectDateWidget(years=range(datetime.today().year-80, datetime.today().year - 4))
+        }

@@ -3,37 +3,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name = "format-detection" content = "telephone=no" />
-<link rel="icon" href=" {%static 'images/favicon.ico'%}">
-<link rel="shortcut icon" href="{% static 'images/favicon.ico'%}" />
-<link rel="stylesheet" href="{% static 'css/stuck.css'%}">
-<link rel="stylesheet" href="{% static 'css/style.css'%}">
-<link rel="stylesheet" href="{% static 'css/touchTouch.css'%}">
-<script src="{% static 'js/jquery.js'%}"></script>
-<script src="{% static 'js/jquery-migrate-1.1.1.js'%}"></script>
-<script src="{% static 'js/script.js'%}"></script>
-<script src="{% static 'js/superfish.js'%}"></script>
-<script src="{% static 'js/jquery.equalheights.js'%}"></script>
-<script src="{% static 'js/jquery.mobilemenu.js'%}"></script>
-<script src="{% static 'js/jquery.easing.1.3.js'%}"></script>
-<script src="{% static 'js/tmStickUp.js'%}"></script>
-<script src="{% static 'js/jquery.ui.totop.js'%}"></script>
-<script src="{% static 'js/touchTouch.jquery.js'%}"></script>
+  <meta name = "format-detection" content = "telephone=no" />
+  <link rel="icon" href=" {%static 'images/favicon.ico'%}">
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico'%}" />
+  <link rel="stylesheet" href="{% static 'css/stuck.css'%}">
+  <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  <link rel="stylesheet" href="{% static 'css/touchTouch.css'%}">
+  <script src="{% static 'js/jquery.js'%}"></script>
+  <script src="{% static 'js/jquery-migrate-1.1.1.js'%}"></script>
+  <script src="{% static 'js/script.js'%}"></script>
+  <script src="{% static 'js/superfish.js'%}"></script>
+  <script src="{% static 'js/jquery.equalheights.js'%}"></script>
+  <script src="{% static 'js/jquery.mobilemenu.js'%}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js'%}"></script>
+  <script src="{% static 'js/tmStickUp.js'%}"></script>
+  <script src="{% static 'js/jquery.ui.totop.js'%}"></script>
+  <script src="{% static 'js/touchTouch.jquery.js'%}"></script>
 
-<script>
- $(document).ready(function(){
+  <script>
+  $(document).ready(function(){
 
-  $().UItoTop({ easingType: 'easeOutQuart' });
-  $('#stuck_container').tmStickUp({});
-  $('.gallery .gall_item').touchTouch();
+    $().UItoTop({ easingType: 'easeOutQuart' });
+    $('#stuck_container').tmStickUp({});
+    $('.gallery .gall_item').touchTouch();
 
   });
-</script>
-<!--[if lt IE 9]>
- <div style=' clear: both; text-align:center; position: relative;'>
-   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-   </a>
+  </script>
+  <!--[if lt IE 9]>
+  <div style=' clear: both; text-align:center; position: relative;'>
+  <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+  <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+</a>
 </div>
 <script src="js/html5shiv.js"></script>
 <link rel="stylesheet" media="screen" href="css/ie.css">
@@ -51,91 +51,115 @@
 </head>
 
 <body class="page1" id="top">
-<!--==============================
-              header
-=================================-->
-<header>
-<!--==============================
-            Stuck menu
-=================================-->
-  <section id="stuck_container">
+  <!--==============================
+  header
+  =================================-->
+  <header>
+    <!--==============================
+    Stuck menu
+    =================================-->
+    <section id="stuck_container">
+      <div class="container">
+        <div class="row">
+          <div class="grid_12">
+            <h1>
+              <a href="{%url 'home:index'%}" alt="Logo alt">
+                <img src="{%static 'images/logo.png'%}" width= '60px' height= '85px'>
+              </a>
+            </h1>
+            <div class="navigation">
+              <nav>
+                <ul class="sf-menu">
+                  <li><a href="{%url 'home:index'%}">Inicio</a></li>
+                    {% if bandera or cat %}
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categorías<span class="caret"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                        {% for cat in categorias %}
+                        <li><a href="{% url 'home:index2' cat.id %}">{{cat.name}}</a></li>
+                        {% endfor %}
+                        <li><a href="{% url 'home:index' %}">Todas</a></li>
+                      </ul>
+                    </li>
+                    {% endif %}
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eventos<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{% url 'event:event_list'%}">Ver agenda</a></li>
+                      <li><a href="#">Crear evento</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Artistas<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      {% if user.is_authenticated %}
+                      <li><a href="#">Ver directorio</a></li>
+                      {% if not user.is_staff and not user.is_artist %}
+                        <li><a href="{% url 'member:artist_manage' user.id %}">Inscribirse</a></li>
+                      {% else %}
+                        {% if user.is_artist and not user.is_staff %}
+                          <li><a href="#">Notificar solicitud</a></li>
+                        {% endif %}
+                      {% endif %}
+                      {% else %}
+                      <li><a href="#">Ver directorio</a></li>
+                      <li><a href="{% url 'login' %}">Inscribirse</a></li>
+                      {% endif %}
+                    </ul>
+                  </li>
+                  <li><a href="#">Reseñas</a></li>
+                  <li class="dropdown">
+                    {% if user.is_authenticated %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{user.username}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      {% if user.is_artist and user.is_staff %}
+                        <li><a href="{% url 'member:artist_edit' user.id %}">Perfil</a></li>
+                      {% endif %}
+                      <li><a href="{% url 'logout' %}">Salir</a></li>
+                    </ul>
+                    {% else %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sesión<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{% url 'login' %}">Entrar</a></li>
+                      <li><a href="{% url 'member:member_create' %}">Registrarse</a></li>
+                    </ul>
+                    {% endif %}
+                  </li>
+                </ul>
+              </nav>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  {% if request.path == '/home/' or  request.path == '/home/1' or  request.path == '/home/2' or  request.path == '/home/3' or  request.path == '/home/4' %}
+  <h1></h1>
+  {% endif %}
+
+
+  <!--=====================
+  Content
+  ======================-->
+  {% block content%}
+
+  {% endblock%}
+  <!--==============================
+  footer
+  =================================-->
+  <footer id="footer">
     <div class="container">
       <div class="row">
         <div class="grid_12">
-        <h1>
-          <a href="{%url 'home:index'%}" alt="Logo alt">
-            <img src="{%static 'images/logo.png'%}" width= '60px' height= '85px'>
-          </a>
-        </h1>
-          <div class="navigation">
-            <nav>
-              <ul class="sf-menu">
-                <li><a href="{%url 'home:index'%}">Inicio</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eventos<span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="{% url 'event:event_list'%}">Ver agenda</a></li>
-                    <li><a href="#">Crear evento</a></li>
-                  </ul>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Artistas<span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Ver directorio</a></li>
-                    <li><a href="#">Inscribirse</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Reseñas</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sesión<span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    {% if user.is_authenticated %}
-                      <li><a href="{% url 'logout' %}">Salir</a></li>
-                      <!--condiciones por si es artista-->
-                    {% else %}
-                      <li><a href="{% url 'login' %}">Entrar</a></li>
-                      <li><a href="{% url 'member:member_create' %}">Registrarse</a></li>
-                    {% endif %}
-                  </ul>
-                </li>
-             </ul>
-            </nav>
-            <div class="clear"></div>
+          <div class="copyright">
+            <span class="brand">CalendArt </span> &copy; <span id="copyright-year"></span> |  <div>Sitio web diseñado by URL</div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-</header>
-
-<!--=====================
-          Content
-======================-->
-{% block content%}
-
-{% endblock%}
-<!--==============================
-              footer
-=================================-->
-<footer id="footer">
-  <div class="container">
-    <div class="row">
-      <div class="grid_12">
-        <div class="socials">
-          <a href="#" class="fa fa-twitter"></a>
-          <a href="#" class="fa fa-facebook"></a>
-          <a href="#" class="fa fa-google-plus"></a>
-          <a href="{% url 'login' %}" class="fa fa-pinterest">Entrar</a>
-        </div>
-          <center>
-          </center>
-        <div class="copyright">
-          <span class="brand">CalendArt </span> &copy; <span id="copyright-year"></span> |  <div>Website designed by URL</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
+  </footer>
 </body>
 
 </html>

@@ -30,12 +30,13 @@ class Member(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_artist = models.BooleanField(default=False)
     date_of_birth = models.DateField()
     biography = models.TextField(blank = True, null = True)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     address = models.CharField(max_length=150, null=True, blank=True)
-    image_profile = models.ImageField(upload_to='members', blank=True, null=True)
-    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
+    image_profile = models.ImageField(upload_to='members', default='members/default.jpg')
+    categories = models.ManyToManyField(Category, blank=False)
     members = models.ManyToManyField('Member', blank = True)
     def __str__(self):
         return self.username

@@ -21,8 +21,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/', login, {'template_name':'miembros/index.html'}, name='login'),
     url(r'^logout/', logout, {'next_page':'home:index'}, name='logout'),
-    url(r'^home/', include('apps.agenda.urls', namespace='home')),
     url(r'^members/', include('apps.miembros.urls', namespace = 'member')),
     url(r'^events/', include('apps.agenda.urls', namespace = 'event')),
     url(r'^notes/', include('apps.notas.urls', namespace = 'note')),
+    url(r'^', include('apps.agenda.urls', namespace='home')),
 ]
