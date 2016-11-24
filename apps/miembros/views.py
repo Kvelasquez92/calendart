@@ -1,15 +1,11 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import CreateView, UpdateView
-from django.views.generic import FormView
+from django.views.generic import CreateView, UpdateView, FormView, ListView, DetailView
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from apps.miembros.models import Member
 from apps.miembros.forms import MemberForm, ArtistForm, ArtistProfileForm
 from django.core.mail import EmailMessage
-from email.mime.image import MIMEImage
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 import os
 from django.conf import settings
 
@@ -53,21 +49,48 @@ def NotificarInscripcion(request):
     correos = []
     for superusuario in superusuarios:
         correos.append(superusuario.email)
-    path = request.POST['image_profile']
-    print (path)
-    img_data = open(os.path.join(settings.MEDIA_ROOT, path), 'rb').read()
-    msg = MIMEMultipart(_subtype='related')
-    body = MIMEText('<p>Hello <img src="cid:myimage" /></p>', _subtype='html')
-    msg.attach(body)
-    img = MIMEImage(img_data, 'jpeg')
-    img.add_header('Content-Id', '<myimage>')
-    msg.attach(img)
-    asunto = 'Nuevas solicitud de inscripción de Artista!'
-    mail = EmailMessage(asunto, msg.as_string(), from_email='Cultural <chicle.kevin@gmail.com>', to = correos)
+    automensaje = '\t\tEl perfil del usuario ' + request.user.username + 'es:' '\n\n'
+    automensaje = automensaje + 'Nombre(s): ' + request.user.first_name + '\n\n'
+    automensaje = automensaje + 'Apellidos(s): ' + request.user.last_name + '\n\n'
+    automensaje = automensaje + 'Fecha de nacimiento: ' + request.user.date_of_birth.strftime('%d/%m/%Y') + '\n\n'
+    automensaje = automensaje + 'Tel: ' + request.user.phone_number + '\n\n'
+    automensaje = automensaje + 'Dirección: ' + request.user.address + '\n\n'
+    automensaje = automensaje + 'Autobiografía: ' + request.user.biography + '\n\n'
+    asunto = 'Nuevas solicitud de inscripción!!'
+    mail = EmailMessage(asunto, automensaje, from_email='Cultural <chicle.kevin@gmail.com>', to = correos)
+    mail.attach_file(os.path.join(settings.MEDIA_ROOT, request.user.image_profile.path))
     mail.send()
+    return redirect('home:index')
 
 class ArtistEditProfile(UpdateView):
     model = Member
     form_class = ArtistProfileForm
     template_name = 'miembros/artist_profile_form.html'
     success_url = reverse_lazy('home:index')
+
+class RequestList(ListView):
+    template_name='miembros/requests.html'
+    model = Member
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(RequestList, self).get_context_data(**kwargs)
+        context['solicitudes'] = Member.objects.filter(is_artist=True, is_staff=False)
+        return context
+
+class DetailRequest(DetailView):
+    model = Member
+    template_name = 'miembros/artist_detail.html'
+
+def RejectRequest(request, pk):
+    miembro = Member.objects.get(id=pk)
+    if request.method == 'POST':
+        Member.objects.get(id=pk).update(is_artist=False)
+        Member.objects.get(id=pk).update(is_staff=True)
+        return redirect('member:requests_list')
+
+def AuthRequest(request, pk):
+    miembro = Member.objects.get(id=pk)
+    if request.method == 'POST':
+        Member.objects.get(id=pk).update(is_staff=True)
+        return redirect('member:requests_list')

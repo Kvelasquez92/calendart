@@ -98,7 +98,7 @@
                         <li><a href="{% url 'member:artist_manage' user.id %}">Inscribirse</a></li>
                       {% else %}
                         {% if user.is_artist and not user.is_staff %}
-                          <li><a href="#">Notificar solicitud</a></li>
+                          <li><a href="{% url 'member:notify_request' %}">Notificar solicitud</a></li>
                         {% endif %}
                       {% endif %}
                       {% else %}

@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block style %}
+<style media="screen">
+.fk{
+  color: white;
+  background-color: #663399;
+  padding: 4px 30px;
+  cursor: pointer;
+  margin: 10px;
+  text-align:center;
+}
+</style>
+{% endblock style %}
+
+{% block title%}Detalle Solicitud{% endblock %}
+
+{% block content %}
+
+<div class="grid_7">
+  <div class="banner">
+    <div class="gall_block">
+      <img src="{{object.image_profile.url}}" alt="" width= '370px' height= '185px'>
+      <div class="bann_capt  bn__1">
+        <div class="maxheight">
+          {% with cat=object.categories.all|first %}
+          {% if cat.image_profile %}
+            <img src="{{ cat.image_profile.url }}" alt="" height="40px" width="40px" style="padding-top:20px;">
+            {% endif %}
+          {% endwith %}
+            <div class="bann_title" style="font-size:20px; line-height:20px;">Artista: {{object.username}}</a></div>
+            <div style="font-size:20px;">
+            <p style="line-height:25px;"><h5 style="line-height:25px;">Nombre(s): {{object.first_name}}</h5></p>
+            <p style="line-height:25px;"><h5 style="line-height:25px;">Apellidos(s): {{object.last_name}}</h5></p>
+            <p style="line-height:25px;"><h5 style="line-height:25px;">Autobiografía: {{object.biography}}</h5></p>
+            <p style="line-height:25px;"><h5 style="line-height:25px;">Email: {{object.email}}</h5></p>
+            <p style="line-height:25px;"><h5 style="line-height:25px;">Fecha de nacimiento: {{object.date_of_birth}}</h5></p>
+            <p style="line-height:25px;"><h5 style="line-height:25px;">Teléfono: {{object.phone_number}}</h5></p>
+            <p style="line-height:25px;"><h5 style="line-height:25px;">Dirección: {{object.address}}</h5></p>
+            <p><a class="fk" href="{% url 'member:requests_list' %}">Volver</a></p>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}

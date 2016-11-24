@@ -43,6 +43,7 @@ class ArtistForm(forms.ModelForm):
             'date_of_birth',
             'image_profile',
             'categories',
+            'is_artist',
         ]
 
         widgets = {
