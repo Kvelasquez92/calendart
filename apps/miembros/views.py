@@ -84,13 +84,37 @@ class DetailRequest(DetailView):
 
 def RejectRequest(request, pk):
     miembro = Member.objects.get(id=pk)
-    if request.method == 'POST':
-        Member.objects.get(id=pk).update(is_artist=False)
-        Member.objects.get(id=pk).update(is_staff=True)
+    if request.method == 'GET':
+        miembro.is_artist = False
+        miembro.is_staff = True
+        miembro.save()
         return redirect('member:requests_list')
+    return render(request, 'miembros/requests.html')
 
 def AuthRequest(request, pk):
     miembro = Member.objects.get(id=pk)
-    if request.method == 'POST':
-        Member.objects.get(id=pk).update(is_staff=True)
+    if request.method == 'GET':
+        miembro.is_staff = True
+        miembro.save()
         return redirect('member:requests_list')
+    return render(request, 'miembros/requests.html')
+
+def Follow(request, pk):
+    artist = Member.objects.get(id=pk)
+    follower = Member.objects.get(id=request.user.id)
+    if request.method == 'GET':
+        if(artist != follower):
+            artist.members.add(follower)
+            artist.save()
+    return redirect('home:index')
+    return render(request, 'agenda/home.html')
+
+def Follow2(request, pk):
+    artist = Member.objects.get(id=pk)
+    follower = Member.objects.get(id=request.user.id)
+    if request.method == 'GET':
+        if(artist != follower):
+            artist.members.add(follower)
+            artist.save()
+    return redirect('home:index2')
+    return render(request, 'agenda/home2.html')

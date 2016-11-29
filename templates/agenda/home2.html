@@ -88,6 +88,42 @@
       </div>
     {%endfor%}
 
+<form method="post">
+{% csrf_token %}
+    <div class="grid_12">
+      <h2>Artistas mas seguidos</h2>
+    </div>
+
+    {%for artista, cantidad in artistas %}
+        <div class="grid_3">
+          <div class="banner">
+            <div class="gall_block">
+              <img src="{{MEDIA_URL}}{{artista.image_profile}}" alt="" width= '370px' height= '185px'>
+              <div class="bann_capt  bn__1">
+                <div class="maxheight">
+                  {% if cat.image_profile %}
+                    <img src="{{MEDIA_URL}}{{ cat.image_profile }}" alt="" height="40px" width="40px" style="padding-top:20px;">
+                    {% endif %}
+                    <div class="bann_title" style="font-size:24px; line-height:20px;"><a href="#">Artista: {{artista.username}}</a></div>
+                    <div style="font-size:20px;">
+                    <p style="line-height:25px;"><h5 style="line-height:25px;">Nombre: {{artista.first_name}} {{artista.last_name}}</h5></p>
+                    <p style="line-height:25px;"><h5 style="line-height:25px;">Dirección: {{artista.address}}</h5></p>
+                    <p style="line-height:25px;"><h5 style="line-height:25px;">Correo: {{artista.email}}</h5></p>
+                    <p style="line-height:25px;"><h5 style="line-height:25px;">Lo siguen: {{cantidad}}</h5></p>
+                    {% if user in artista.members.all %}
+                      <p><a href="#" style="color: darkgray;background-color: gray;padding: 4px 30px;margin: 10px;text-align:center;">Seguir</a></p>
+                    {% else %}
+                    <p><a href="{% url 'member:following_artist2' artista.id %}" style="color: white;background-color: #663399;padding: 4px 30px;cursor: pointer; margin: 10px;text-align:center;">Seguir</a></p>
+                    {% endif %}
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    {%endfor%}
+
+  </form>
 
 <!--
     <div class="grid_12">

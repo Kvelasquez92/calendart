@@ -42,6 +42,8 @@ body{
 {% block title %}Solicitudes{% endblock title %}
 
 {% block content %}
+<form method="post">
+{% csrf_token %}
 <center>
   <table class="table table-bordered">
     <thead>
@@ -55,7 +57,6 @@ body{
     <tbody>
       {% if solicitudes %}
       {% for solicitud in solicitudes %}
-      <form class="" method="post">
       <tr>
         <td>
           <a href="{{ solicitud.image_profile.url }}"><img src="{{ solicitud.image_profile.url }}" style="width:150px;height:140px;"></a>
@@ -63,12 +64,11 @@ body{
         <td>{{ solicitud.username }}</td>
         <td>{{ solicitud.first_name }} {{ solicitud.last_name }}</td>
         <td>
-          <a class="fk" href="{% url 'member:request_detail' solicitud.id %}"></a>
-          <a class="fk" href="#">Denegar</a>
-          <a class="fk" href="#">Autorizar</a>
+          <p><a type="submit" class="fk" href="{% url 'member2:request_detail' solicitud.id %}">Detalle</a></p>
+          <p><a type="submit" class="fk" href="{% url 'member:reject_request' solicitud.id %}">Denegar</a></p>
+          <p><a type="submit" class="fk" href="{% url 'member:authorizate_request' solicitud.id %}">Autorizar</a></p>
         </td>
       </tr>
-      </form>
       {% endfor %}
       {% else %}
       <h3>No hay solicitudes pendientes!!!</h3>
@@ -86,4 +86,5 @@ body{
     {% endif %}
   </div>
 </center>
+</form>
 {% endblock content %}

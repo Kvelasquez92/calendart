@@ -12,14 +12,17 @@
   margin: 10px;
   text-align:center;
 }
+body{
+  background-color: white;
+}
 </style>
 {% endblock style %}
 
 {% block title%}Detalle Solicitud{% endblock %}
 
+<center>
 {% block content %}
-
-<div class="grid_7">
+<div class="grid_5">
   <div class="banner">
     <div class="gall_block">
       <img src="{{object.image_profile.url}}" alt="" width= '370px' height= '185px'>
@@ -31,7 +34,7 @@
             {% endif %}
           {% endwith %}
             <div class="bann_title" style="font-size:20px; line-height:20px;">Artista: {{object.username}}</a></div>
-            <div style="font-size:20px;">
+            <div style="font-size:20px; text-align:justify; padding-left:20%;">
             <p style="line-height:25px;"><h5 style="line-height:25px;">Nombre(s): {{object.first_name}}</h5></p>
             <p style="line-height:25px;"><h5 style="line-height:25px;">Apellidos(s): {{object.last_name}}</h5></p>
             <p style="line-height:25px;"><h5 style="line-height:25px;">Autobiografía: {{object.biography}}</h5></p>
@@ -39,12 +42,12 @@
             <p style="line-height:25px;"><h5 style="line-height:25px;">Fecha de nacimiento: {{object.date_of_birth}}</h5></p>
             <p style="line-height:25px;"><h5 style="line-height:25px;">Teléfono: {{object.phone_number}}</h5></p>
             <p style="line-height:25px;"><h5 style="line-height:25px;">Dirección: {{object.address}}</h5></p>
-            <p><a class="fk" href="{% url 'member:requests_list' %}">Volver</a></p>
+            <p><a class="fk" href="{% url 'member1:requests_list' %}">Volver</a></p>
             </div>
         </div>
       </div>
     </div>
 </div>
 </div>
-
 {% endblock content %}
+</center>

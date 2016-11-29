@@ -94,11 +94,14 @@
                     <ul class="dropdown-menu" role="menu">
                       {% if user.is_authenticated %}
                       <li><a href="#">Ver directorio</a></li>
+                      {% if user.is_superuser %}
+                        <li><a href="{% url 'member1:requests_list' %}">Solicitudes</a></li>
+                      {% endif %}
                       {% if not user.is_staff and not user.is_artist %}
                         <li><a href="{% url 'member:artist_manage' user.id %}">Inscribirse</a></li>
                       {% else %}
                         {% if user.is_artist and not user.is_staff %}
-                          <li><a href="{% url 'member:notify_request' %}">Notificar solicitud</a></li>
+                          <li><a href="{% url 'member:notify_request' %}">Notificar</a></li>
                         {% endif %}
                       {% endif %}
                       {% else %}

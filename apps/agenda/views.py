@@ -11,7 +11,7 @@ from django.views.generic import CreateView, ListView, DetailView
 
 def Home(request):
     events = Event.objects.all().order_by('date')[:4]
-    most_followed = Member.objects.annotate(member_count=Count('members')).filter(is_artist=True).order_by('-member_count')[:4]
+    most_followed = Member.objects.annotate(member_count=Count('members')).filter(is_artist=True, is_staff=True).order_by('-member_count')[:4]
     count_followers =[]
     for artist in most_followed:
         count_followers.append(artist.members.count())
@@ -34,8 +34,23 @@ def Home2(request, pk):
                 break
         if counter==4:
             break
+    most_followed = Member.objects.annotate(member_count=Count('members')).filter(is_artist=True, is_staff=True).order_by('-member_count')
+    cat_artist = []
+    counter = 1
+    for artist in most_followed:
+        for cat in artist.categories.all():
+            if cat == sel_category:
+                cat_artist.append(artist)
+                counter+=1
+                break
+        if counter==4:
+            break
+    count_followers =[]
+    for artist in most_followed:
+        count_followers.append(artist.members.count())
+    most_followeds = zip(cat_artist, count_followers)
     cats = Category.objects.all()
-    contexto = {'object_list':cat_event, 'categorias':cats, 'cat':sel_category,}
+    contexto = {'object_list':cat_event, 'categorias':cats, 'cat':sel_category, 'artistas':most_followeds,}
     return render(request, 'agenda/home2.html', contexto)
 
 class EventCreate(CreateView):
